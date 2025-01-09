@@ -1,0 +1,30 @@
+name: Autograding Tests
+'on':
+- push
+- repository_dispatch
+permissions:
+  checks: write
+  actions: read
+  contents: read
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: First reverse test
+      id: first-reverse-test
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: First reverse test
+        setup-command: mvn compile
+        command: mvn -Dtest=FirstTests#reverseTest test
+        timeout: 1
+        max-score: 1
+    - name: Autograding Reporter
+      uses: classroom-resources/autograding-grading-reporter@v1
+      env:
+        FIRST-REVERSE-TEST_RESULTS: "${{steps.first-reverse-test.outputs.result}}"
+      with:
+        runners: first-reverse-test
