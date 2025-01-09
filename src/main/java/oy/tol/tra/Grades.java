@@ -26,7 +26,7 @@ public class Grades {
 
       int i = 0;
       // TEACHER: the correct condition is while (i < elements.length/2) {
-      while (i <= grades.length/2) {
+      while (i < grades.length/2) {
          int temp = grades[i];
          grades[i] = grades[grades.length-i-1];
          grades[grades.length-i-1] = temp;
