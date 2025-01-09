@@ -67,20 +67,20 @@ jobs:
         command: mvn -Dtest=GenericTests#reverseTestString test
         timeout: 1
         max-score: 1
+    - name: Generic sort test with integers
+      id: generic-sort-test-with-integers
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Generic sort test with integers
+        setup-command: mvn compile
+        command: mvn -Dtest=GenericTests#sortTestInteger test
+        timeout: 1
+        max-score: 1
     - name: Generic sort test with strings
       id: generic-sort-test-with-strings
       uses: classroom-resources/autograding-command-grader@v1
       with:
         test-name: Generic sort test with strings
-        setup-command: mvn compile
-        command: mvn -Dtest=GenericTests#sortTestString test
-        timeout: 1
-        max-score: 1
-    - name: Generic sort test with Stings
-      id: generic-sort-test-with-stings
-      uses: classroom-resources/autograding-command-grader@v1
-      with:
-        test-name: Generic sort test with Stings
         setup-command: mvn compile
         command: mvn -Dtest=GenericTests#sortTestString test
         timeout: 1
@@ -94,7 +94,7 @@ jobs:
         SECOND-SORT-TEST_RESULTS: "${{steps.second-sort-test.outputs.result}}"
         GENERIC-REVERSE-TEST-WITH-INTEGERS_RESULTS: "${{steps.generic-reverse-test-with-integers.outputs.result}}"
         GENERIC-REVERSE-TEST-WITH-STRINGS_RESULTS: "${{steps.generic-reverse-test-with-strings.outputs.result}}"
+        GENERIC-SORT-TEST-WITH-INTEGERS_RESULTS: "${{steps.generic-sort-test-with-integers.outputs.result}}"
         GENERIC-SORT-TEST-WITH-STRINGS_RESULTS: "${{steps.generic-sort-test-with-strings.outputs.result}}"
-        GENERIC-SORT-TEST-WITH-STINGS_RESULTS: "${{steps.generic-sort-test-with-stings.outputs.result}}"
       with:
-        runners: first-reverse-test,first-sort-test,second-reverse-test,second-sort-test,generic-reverse-test-with-integers,generic-reverse-test-with-strings,generic-sort-test-with-strings,generic-sort-test-with-stings
+        runners: first-reverse-test,first-sort-test,second-reverse-test,second-sort-test,generic-reverse-test-with-integers,generic-reverse-test-with-strings,generic-sort-test-with-integers,generic-sort-test-with-strings
