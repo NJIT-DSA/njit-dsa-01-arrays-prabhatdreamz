@@ -22,9 +22,29 @@ jobs:
         command: mvn -Dtest=FirstTests#reverseTest test
         timeout: 1
         max-score: 1
+    - name: First sort test
+      id: first-sort-test
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: First sort test
+        setup-command: mvn compile
+        command: mvn -Dtest=FirstTests#sortTest test
+        timeout: 1
+        max-score: 1
+    - name: Second reverse test
+      id: second-reverse-test
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Second reverse test
+        setup-command: mvn compile
+        command: mvn -Dtest=SecondTests#reverseTest test
+        timeout: 1
+        max-score: 1
     - name: Autograding Reporter
       uses: classroom-resources/autograding-grading-reporter@v1
       env:
         FIRST-REVERSE-TEST_RESULTS: "${{steps.first-reverse-test.outputs.result}}"
+        FIRST-SORT-TEST_RESULTS: "${{steps.first-sort-test.outputs.result}}"
+        SECOND-REVERSE-TEST_RESULTS: "${{steps.second-reverse-test.outputs.result}}"
       with:
-        runners: first-reverse-test
+        runners: first-reverse-test,first-sort-test,second-reverse-test
