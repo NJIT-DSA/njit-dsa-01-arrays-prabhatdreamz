@@ -32,7 +32,7 @@ public class Grades {
          grades[grades.length-i-1] = temp;
          i++;
      }
-   //   Algorithms.reverse(grades);
+      Algorithms.reverse(grades);
    }
 
    /**
@@ -40,7 +40,7 @@ public class Grades {
     */
    public void sort() {
   
-      // Algorithms.sort(grades);
+       Algorithms.sort(grades);
 
       int i = grades.length-1;
       while (i > 0) {
